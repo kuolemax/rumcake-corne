@@ -13,10 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
     - name: Install Rust
       uses: actions-rs/toolchain@v1
+      with:
+        channel: nightly-2023-12-05
+        target: thumbv7em-none-eabihf
+        components: rust-src, rustfmt, llvm-tools-preview
+
+    - name: Checkout code
+      uses: actions/checkout@v2
 
     - name: Build project
       run: sh build.sh
