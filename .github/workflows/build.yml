@@ -30,7 +30,7 @@ jobs:
 
     - name: Zip artifacts
       run: |
-        echo "PROJECT_NAME=$(grep -oP 'name\s*=\s*"\K[^"]+' Cargo.toml)" >> "$GITHUB_ENV"
+        echo "PROJECT_NAME=$(awk -F '"' '/^name = "/ {print $2 ; exit}' Cargo.toml)" >> "$GITHUB_ENV"
         mkdir dist
         cp left.bin dist/left.bin
         cp right.bin dist/right.bin
