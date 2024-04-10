@@ -33,10 +33,10 @@ jobs:
         mkdir dist
         cp left.bin dist/left.bin
         cp right.bin dist/right.bin
-        zip -r ${{ github.repository }}.zip dist/
+        zip -r firmware.zip dist/
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ github.repository }}
-        path: ${{ github.repository }}.zip
+        name: firmware
+        path: firmware.zip
