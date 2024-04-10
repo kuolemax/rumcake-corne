@@ -34,10 +34,10 @@ jobs:
         mkdir dist
         cp left.bin dist/left.bin
         cp right.bin dist/right.bin
-        zip -r $PROJECT_NAME.zip dist/
+        zip -r ${{ env.PROJECT_NAME }}.zip dist/
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: $PROJECT_NAME
-        path: $PROJECT_NAME.zip
+        name: ${{ env.PROJECT_NAME }}
+        path: ${{ env.PROJECT_NAME }}.zip
