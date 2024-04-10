@@ -15,10 +15,6 @@ jobs:
     steps:
     - name: Install Rust
       uses: actions-rs/toolchain@v1
-      with:
-        toolchain: nightly-2024-02-04
-        target: thumbv7em-none-eabihf
-        override: true
 
     - name: Checkout code
       uses: actions/checkout@v2
