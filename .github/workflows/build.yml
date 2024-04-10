@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        override: true
+
+    - name: Build project
+      run: sh build.sh
+
+    - name: Zip artifacts
+      run: |
+        mkdir dist
+        cp left.bin dist/left.bin
+        cp right.bin dist/right.bin
+        zip -r rumcake-corne.zip dist/
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: rumcake-corne
+        path: rumcake-corne.zip
