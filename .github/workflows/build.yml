@@ -13,14 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
     - name: Install Rust
       uses: actions-rs/toolchain@v1
       with:
         toolchain: nightly
+        target: thumbv7em-none-eabihf
         override: true
+
+    - name: Checkout code
+      uses: actions/checkout@v2
 
     - name: Build project
       run: sh build.sh
@@ -30,10 +31,10 @@ jobs:
         mkdir dist
         cp left.bin dist/left.bin
         cp right.bin dist/right.bin
-        zip -r rumcake-corne.zip dist/
+        zip -r ${{ github.repository }}.zip dist/
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: rumcake-corne
-        path: rumcake-corne.zip
+        name: ${{ github.repository }}
+        path: ${{ github.repository }}.zip
