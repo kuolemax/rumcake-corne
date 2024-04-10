@@ -19,6 +19,8 @@ jobs:
         toolchain: nightly-2023-12-05
         target: thumbv7em-none-eabihf
         components: rust-src, rustfmt, llvm-tools-preview
+    - name: Install cargo-objcopy
+      run: cargo install cargo-objcopy
 
     - name: Checkout code
       uses: actions/checkout@v2
