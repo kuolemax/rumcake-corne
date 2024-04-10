@@ -20,7 +20,7 @@ jobs:
         target: thumbv7em-none-eabihf
         components: rust-src, rustfmt, llvm-tools-preview
     - name: Install cargo-objcopy
-      run: cargo install cargo-objcopy
+      run: cargo install cargo-binutils
 
     - name: Checkout code
       uses: actions/checkout@v2
