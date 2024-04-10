@@ -11,7 +11,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      PROJECT_NAME: rumcake-firmware
     steps:
     - name: Install Rust
       uses: actions-rs/toolchain@v1
@@ -30,11 +31,12 @@ jobs:
 
     - name: Zip artifacts
       run: |
-        echo "PROJECT_NAME=$(awk -F '"' '/^name = "/ {print $2 ; exit}' Cargo.toml)" >> "$GITHUB_ENV"
+        export PROJECT_NAME=$(awk -F '"' '/^name = "/ {print $2 ; exit}' Cargo.toml)
+        echo "PROJECT_NAME=$PROJECT_NAME" >> "$GITHUB_ENV"
         mkdir dist
         cp left.bin dist/left.bin
         cp right.bin dist/right.bin
-        zip -r "${{ env.PROJECT_NAME }}".zip dist/
+        zip -r "$PROJECT_NAME".zip dist/
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
